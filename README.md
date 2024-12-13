@@ -41,21 +41,24 @@ Antes de começar, certifique-se de ter instalado:
 ## Configuração do Docker
 
 1. Criação de uma Rede Docker
-    - Para que o front-end e o load balancer possam se comunicar, crie uma rede Docker:
+- Para que o front-end e o load balancer possam se comunicar, crie uma rede Docker:
     ```
     docker network create empreitaeh-front
     ```
 
 2. Subindo o Container do Front-End
-    - Execute o container Nginx para servir o front-end:
+- Execute o container Nginx para servir o front-end:
     ```
     docker run --network empreitaeh-front --name frontend -v $(pwd)/build:/usr/share/nginx/html -d nginx
     ```
 
 ## Setup do Nginx 
 
-1. Arquivo nginx.conf
-    
+### Arquivo nginx.conf
+- O `nginx.conf` é usado para configurações globais do Nginx, como número de processos e configurações gerais de rede.
+
+
+    ```nginx
     server {
         listen       80;
         listen  [::]:80;
@@ -71,9 +74,10 @@ Antes de começar, certifique-se de ter instalado:
             root   /usr/share/nginx/html;
         }
     }
+    ```
 
-2. Arquivo default.conf
-
+### Arquivo default.conf
+    ```
     upstream nodes {
     server node1;
     server node2;
@@ -91,6 +95,7 @@ Antes de começar, certifique-se de ter instalado:
             try_files $uri $uri/ /index.html;
         }
     }
+    ```
 
 3. Suba o container do Nginx com o arquivo default.conf:
     ```
@@ -101,15 +106,15 @@ Antes de começar, certifique-se de ter instalado:
 
 1. Certifique-se de que os containers do front-end, back-end e do Nginx estão rodando.
 2. Acesse a aplicação em:
-    - http://localhost
+- http://localhost
 
 
 ## Problemas Conhecidos
 
 1. Erro 404 ao recarregar a página:
 
-    - Certifique-se de que o arquivo default.conf está configurado corretamente para redirecionar todas as requisições para /index.html.
+- Certifique-se de que o arquivo default.conf está configurado corretamente para redirecionar todas as requisições para /index.html.
     
 2. Erro 500 ao acessar /auth:
 
-    - Verifique se o upstream nodes está apontando para servidores válidos.
+- Verifique se o upstream nodes está apontando para servidores válidos.
