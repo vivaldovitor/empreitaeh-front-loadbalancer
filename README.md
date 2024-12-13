@@ -79,11 +79,11 @@ Antes de começar, certifique-se de ter instalado:
 ### Arquivo default.conf
     
     upstream nodes {
-    server node1;
-    server node2;
-    server node3;
-    server node4;
-    server node5;
+        server node1;
+        server node2;
+        server node3;
+        server node4;
+        server node5;
     }
 
     server {
