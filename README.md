@@ -74,11 +74,10 @@ Antes de começar, certifique-se de ter instalado:
             root   /usr/share/nginx/html;
         }
     }
-    ```
+    
 
 ### Arquivo default.conf
     
-    ```nginx
     upstream nodes {
     server node1;
     server node2;
@@ -96,7 +95,7 @@ Antes de começar, certifique-se de ter instalado:
             try_files $uri $uri/ /index.html;
         }
     }
-    ```
+    
 
 3. Suba o container do Nginx com o arquivo default.conf:
     ```
