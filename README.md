@@ -77,7 +77,8 @@ Antes de começar, certifique-se de ter instalado:
     ```
 
 ### Arquivo default.conf
-    ```
+    
+    ```nginx
     upstream nodes {
     server node1;
     server node2;
