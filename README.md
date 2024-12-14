@@ -97,10 +97,23 @@ Antes de começar, certifique-se de ter instalado:
     }
     
 
-3. Suba o container do Nginx com o arquivo default.conf:
+3. Suba o container e os nós do Nginx com o arquivo default.conf:
+    - Load Balancer
+    
     ```
-    docker run --network empreitaeh-front -p 80:80 -v $(pwd)/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+    docker run -it -p 80:80 --network empreitaeh-front -v ./build:/usr/share/nginx/html -v ./default.conf:/etc/nginx/conf.d/default.conf --name loadbalancer --hostname loadbalancer     nginx:alpine
     ```
+
+    - Nós
+    
+    ```
+    docker run -d --network empreitaeh-front --name node1 --hostname node1 -v /build:/usr/share/nginx/html nginx:alpine
+    docker run -d --network empreitaeh-front --name node2 --hostname node2 -v /build:/usr/share/nginx/html nginx:alpine
+    docker run -d --network empreitaeh-front --name node3 --hostname node3 -v /build:/usr/share/nginx/html nginx:alpine
+    docker run -d --network empreitaeh-front --name node4 --hostname node4 -v /build:/usr/share/nginx/html nginx:alpine
+    docker run -d --network empreitaeh-front --name node5 --hostname node5 -v /build:/usr/share/nginx/html nginx:alpine
+    ```
+
 
 ## Como Rodar a Aplicação
 
